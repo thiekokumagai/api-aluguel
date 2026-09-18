@@ -26,7 +26,7 @@ export class LoginUseCase {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload = { sub: user.id, email: user.email, role: user.role, tenantId: user.organizationId };
+    const payload = { sub: user.id, email: user.email, name: user.name, role: user.role, tenantId: user.organizationId };
     
     return {
       access_token: await this.jwtService.signAsync(payload),
