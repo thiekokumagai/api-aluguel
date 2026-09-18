@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ClsModule } from 'nestjs-cls';
 import { CoreModule } from './core/core.module';
-import { TenantsModule } from './tenants/tenants.module';
-import { AuthModule } from './auth/auth.module';
-import { PropertiesModule } from './properties/properties.module';
-import { RentersModule } from './renters/renters.module';
+import { TenantsModule } from './modules/tenants/tenants.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { PropertiesModule } from './modules/properties/properties.module';
+import { RentersModule } from './modules/renters/renters.module';
 
 @Module({
   imports: [

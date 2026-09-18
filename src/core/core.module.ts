@@ -24,7 +24,8 @@ export function createExtendedPrismaClient(cls: ClsService) {
                 }
                 return result;
               } else if (['findMany', 'findFirst', 'update', 'updateMany', 'delete', 'deleteMany', 'count'].includes(operation)) {
-                args.where = { ...args.where, organizationId: tenantId };
+                const where = (args as Record<string, unknown>).where as Record<string, unknown> | undefined;
+                (args as Record<string, unknown>).where = { ...where, organizationId: tenantId };
               }
             }
           }

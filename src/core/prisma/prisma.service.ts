@@ -26,10 +26,12 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
                 if (['findUnique', 'findUniqueOrThrow'].includes(operation)) {
                   // Transform unique find into findFirst to allow injecting organizationId safely
                   // Prisma's findUnique rejects non-unique where inputs
-                  (args as any).where = { ...args.where, organizationId: tenantId };
+                  const where = (args as Record<string, unknown>).where as Record<string, unknown> | undefined;
+                  (args as Record<string, unknown>).where = { ...where, organizationId: tenantId };
                   return (query as any)({ ...args, take: 1, _mutation: false, _queryType: 'findFirst' });
                 } else if (['findMany', 'findFirst', 'update', 'updateMany', 'delete', 'deleteMany', 'count'].includes(operation)) {
-                  args.where = { ...args.where, organizationId: tenantId };
+                  const where = (args as Record<string, unknown>).where as Record<string, unknown> | undefined;
+                  (args as Record<string, unknown>).where = { ...where, organizationId: tenantId };
                 }
               }
             }
